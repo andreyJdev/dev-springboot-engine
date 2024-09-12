@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ВИНОГРАДиЯ — продажа саженцев, черенков винограда Горбач А.Ф. из Волгоградской области</title>
+    <meta name="description"
+          content="Продажа саженцев и черенков распространенных и новых сортов и гибридных форм винограда">
+    <meta name="keywords"
+          content="саженцы винограда, черенки винограда, Волгоградская область, Волгоград, купить, продажа"/>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style-footer.css">
+</head>
+
+<body>
+<div class="main">
+    <header th:insert="~{blocks/header :: header}" />
+    <section th:insert="~{blocks/buttons :: buttons}" />
+    <div class="container text-margin">
+        <!-- форма добавления сорта -->
+        <h2> Добавление сорта </h2>
+        <form method="POST" action="">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <div class="row mb-10">
+                <select name="selection" class="form-select" id="selection">
+                    <option selected disabled>
+                        <?php echo $selection; ?>
+                    </option>
+                    <?php $query = $mysqli->query("SELECT s_id, selection FROM selections");
+                    for($i = 0;$row = $query->fetch_assoc(); $i++)
+                    {
+                    echo '<option value="'.$row['selection'].'">'.$row['selection'].'</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="row mb-10">
+                <div class="col-4" style="padding-left: 0px !important;">
+                    <input type="text" name="name" class="form-control btn-outline-dark" id="name"
+                           value="<?php echo $name; ?>" placeholder="Название сорта" required />
+                </div>
+                <div class="col-8" style="padding-right: 0px !important;">
+                    <input type="text" name="selection_mini" class="form-control btn-outline-dark"
+                           id="selection_mini" value="<?php echo $selection_mini; ?>"
+                           placeholder="Мини селекция (если нет полноценной)" />
+                </div>
+            </div>
+            <div class="row mb-10">
+                <div class="col" style="padding-left: 0px !important;">
+                    <input type="text" name="sajIn" class="form-control btn-outline-dark" id="sajIn"
+                           value="<?php echo $sajIn; ?>" placeholder="Саженцев (в наличии)" />
+                </div>
+                <div class="col" style="padding-right: 0px !important;">
+                    <input type="text" name="sajOut" class="form-control btn-outline-dark"
+                           id="sajOut" value="<?php echo $sajOut; ?>"
+                           placeholder="Саженцев (продано)" />
+                </div>
+            </div>
+            <div class="row mb-10">
+                <div class="col" style="padding-left: 0px !important;">
+                    <input type="text" name="cherIn" class="form-control btn-outline-dark" id="cherIn"
+                           value="<?php echo $cherIn; ?>" placeholder="Черенков (в наличии)" />
+                </div>
+                <div class="col" style="padding-right: 0px !important;">
+                    <input type="text" name="cherOut" class="form-control btn-outline-dark"
+                           id="cherOut" value="<?php echo $cherOut; ?>"
+                           placeholder="Черенков (продано)" />
+                </div>
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="time" class="form-control btn-outline-dark" id="time"
+                       value="<?php echo $time; ?>" placeholder="Срок созревания" required />
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="strength" class="form-control btn-outline-dark" id="strength"
+                       value="<?php echo $strength; ?>" placeholder="Сила роста" required />
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="cluster" class="form-control btn-outline-dark" id="cluster"
+                       value="<?php echo $cluster; ?>" placeholder="Гроздь" required />
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="berry" class="form-control btn-outline-dark" id="berry"
+                       value="<?php echo $berry; ?>" placeholder="Ягода" required />
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="taste" class="form-control btn-outline-dark" id="taste"
+                       value="<?php echo $taste; ?>" placeholder="Вкус и консистенция мякоти" required />
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="f_resistance" class="form-control btn-outline-dark" id="f_resistance"
+                       value="<?php echo $f_resistance; ?>" placeholder="Морозо-стойкость" required />
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="price_seed" class="form-control btn-outline-dark" id="price_seed"
+                       value="<?php echo $price_seed; ?>" placeholder="Цена саженца" required />
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="price_cut" class="form-control btn-outline-dark" id="price_cut"
+                       value="<?php echo $price_cut; ?>" placeholder="Цена черенка" required />
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="description" class="form-control btn-outline-dark" id="description"
+                       value="<?php echo $description; ?>" placeholder="Описание (необязательно)" />
+            </div>
+            <div class="row mb-10">
+                <input type="text" name="image" class="form-control btn-outline-dark" id="image"
+                       value="<?php echo $image; ?>" placeholder="Изображение (необязательно)" />
+            </div>
+            <div class="row mb-10">
+                <input type="submit" name="update1" value="Изменить" class="btn btn-dark mb-3" required />
+            </div>
+        </form>
+    </div>
+    </section>
+
+</div>
+</body>
+</html>
