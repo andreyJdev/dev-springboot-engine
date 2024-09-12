@@ -23,7 +23,7 @@
         <div class="container text-margin">
             <!-- форма добавления селекции -->
             <h2> Добавление селекции </h2>
-            <form th:method="POST" th:action="@{/admin}" th:object="${selection}">
+            <form th:method="POST" th:action="@{/admin/save-selec}" th:object="${selection}">
                 <div class="row mb-10">
                     <input type="text" th:field="*{name}" class="form-control btn-outline-dark" id="selection"
                            placeholder="Название селекции" required />

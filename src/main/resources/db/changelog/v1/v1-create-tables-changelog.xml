@@ -4,7 +4,7 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="1" author="andreiJdev">
-        <createTable tableName="Selection">
+        <createTable tableName="selection">
             <column name="id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -15,7 +15,7 @@
     </changeSet>
 
     <changeSet id="2" author="andreiJdev">
-        <createTable tableName="Product">
+        <createTable tableName="product">
             <column name="id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -39,10 +39,23 @@
             <column name="cher_out" type="INT"/>
             <column name="selection_id" type="BIGINT"/>
         </createTable>
-
-        <addForeignKeyConstraint baseTableName="Product" baseColumnNames="selection_id"
-                                 constraintName="fk_product_selection" referencedTableName="Selection"
+        <addForeignKeyConstraint baseTableName="product" baseColumnNames="selection_id"
+                                 constraintName="fk_product_selection" referencedTableName="selection"
                                  referencedColumnNames="id" onDelete="SET NULL"/>
+    </changeSet>
+
+    <changeSet id="3" author="andreyJdev">
+        <createSequence sequenceName="selection_sequence"
+                        startValue="1"
+                        incrementBy="1"
+                        cycle="true" />
+    </changeSet>
+
+    <changeSet id="4" author="andreyJdev">
+        <createSequence sequenceName="product_sequence"
+                        startValue="1"
+                        incrementBy="1"
+                        cycle="true" />
     </changeSet>
 
 </databaseChangeLog>

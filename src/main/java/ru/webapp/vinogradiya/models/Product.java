@@ -3,7 +3,7 @@ package ru.webapp.vinogradiya.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "product")
 public class Product {
     @Id
     @Column(name = "id")
@@ -20,6 +20,9 @@ public class Product {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "time")
+    private String time;
 
     @Column(name = "strength")
     private String strength;
@@ -45,6 +48,9 @@ public class Product {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "selection_mini")
     private String selectionMini;
 
@@ -54,6 +60,12 @@ public class Product {
     @Column(name = "saj_out")
     private Integer sajOut;
 
+    @Column(name = "cher_in")
+    private Integer cherIn;
+
+    @Column(name = "cher_out")
+    private Integer cherOut;
+
     @ManyToOne
     @JoinColumn(name = "selection_id", referencedColumnName = "id")
     Selection selection;
@@ -62,13 +74,15 @@ public class Product {
 
     }
 
-    public Product(String strength, String name,
+    public Product(String strength, String name, String time,
                    String cluster, String berry,
                    String taste, Integer resistanceCold,
                    Integer priceSeed, Integer priceCut,
-                   String image, String selectionMini,
+                   String image, String description, String selectionMini,
                    Integer sajIn, Integer sajOut,
+                   Integer cherIn, Integer cherOut,
                    Selection selection) {
+        this.time = time;
         this.strength = strength;
         this.name = name;
         this.cluster = cluster;
@@ -78,9 +92,12 @@ public class Product {
         this.priceSeed = priceSeed;
         this.priceCut = priceCut;
         this.image = image;
+        this.description = description;
         this.selectionMini = selectionMini;
         this.sajIn = sajIn;
         this.sajOut = sajOut;
+        this.cherIn = cherIn;
+        this.cherOut = cherOut;
         this.selection = selection;
     }
 
@@ -98,6 +115,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getStrength() {
@@ -172,6 +197,14 @@ public class Product {
         this.image = image;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Integer getSajIn() {
         return sajIn;
     }
@@ -186,6 +219,22 @@ public class Product {
 
     public void setSajOut(Integer sajOut) {
         this.sajOut = sajOut;
+    }
+
+    public Integer getCherIn() {
+        return cherIn;
+    }
+
+    public void setCherIn(Integer cherIn) {
+        this.cherIn = cherIn;
+    }
+
+    public Integer getCherOut() {
+        return cherOut;
+    }
+
+    public void setCherOut(Integer cherOut) {
+        this.cherOut = cherOut;
     }
 
     public Selection getSelection() {

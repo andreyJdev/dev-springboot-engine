@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "Selection")
+@Table(name = "selection")
 public class Selection {
     @Id
     @Column(name = "id")
@@ -29,7 +29,7 @@ public class Selection {
     private List<Product> products;
 
     public Selection() {
-
+        System.out.println();
     }
 
     public Selection(String name) {

@@ -13,13 +13,13 @@ import ru.webapp.vinogradiya.services.ProductsService;
 import ru.webapp.vinogradiya.services.SelectionsService;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
     ProductsService productsService;
     SelectionsService selectionsService;
 
     @Autowired
-    public AdminController(SelectionsService selectionsService) {
+    public AdminController(ProductsService productsService, SelectionsService selectionsService) {
         this.productsService = productsService;
         this.selectionsService = selectionsService;
     }
@@ -32,8 +32,15 @@ public class AdminController {
 
     @GetMapping("/new-product")
     public String newProduct(Model model) {
+        model.addAttribute("selections", selectionsService.findAll());
         model.addAttribute("product", new Product());
         return "admin/newProduct";
+    }
+
+    @PostMapping("/save-prod")
+    public String saveNewProduct(@ModelAttribute("product") Product product) {
+        productsService.create(product);
+        return "redirect:/admin";
     }
 
     @GetMapping("/new-selection")
@@ -42,7 +49,8 @@ public class AdminController {
         return "admin/newSelection";
     }
 
-    @PostMapping()
+
+    @PostMapping("/save-selec")
     public String saveNewSelection(@ModelAttribute("selection") Selection selection) {
         selectionsService.create(selection);
         return "redirect:/admin";
