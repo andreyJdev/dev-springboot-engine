@@ -1,0 +1,48 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="andreiJdev">
+        <createTable tableName="Selection">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="andreiJdev">
+        <createTable tableName="Product">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time" type="VARCHAR(100)"/>
+            <column name="strength" type="VARCHAR(100)"/>
+            <column name="cluster" type="VARCHAR(100)"/>
+            <column name="berry" type="VARCHAR(100)"/>
+            <column name="taste" type="VARCHAR(100)"/>
+            <column name="resistance_cold" type="INT"/>
+            <column name="price_seed" type="INT"/>
+            <column name="price_cut" type="INT"/>
+            <column name="image" type="VARCHAR(100)"/>
+            <column name="description" type="VARCHAR"/>
+            <column name="selection_mini" type="VARCHAR(100)"/>
+            <column name="saj_in" type="INT"/>
+            <column name="saj_out" type="INT"/>
+            <column name="cher_in" type="INT"/>
+            <column name="cher_out" type="INT"/>
+            <column name="selection_id" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="Product" baseColumnNames="selection_id"
+                                 constraintName="fk_product_selection" referencedTableName="Selection"
+                                 referencedColumnNames="id" onDelete="SET NULL"/>
+    </changeSet>
+
+</databaseChangeLog>

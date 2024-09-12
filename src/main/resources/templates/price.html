@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ВИНОГРАДиЯ — продажа саженцев, черенков винограда Горбач А.Ф. из Волгоградской области</title>
+    <meta name="description"
+          content="Продажа саженцев и черенков распространенных и новых сортов и гибридных форм винограда">
+    <meta name="keywords"
+          content="саженцы винограда, черенки винограда, Волгоградская область, Волгоград, купить, продажа"/>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-footer.css">
+</head>
+
+<body>
+    <div class="main">
+        <header th:insert="~{blocks/header :: header}"></header>
+
+        <section>
+            <section>
+                <div class="container text-margin">
+                    <h1>Каталог саженцев, черенков винограда на осень <?php echo($year);?> - весна <?php echo($yearNew);?> года</h1>
+                    <!--<a class="move" href="download/Price-list_GorbachAF_2022-2023.pdf" download>Скачать прайс-лист</a>-->
+                </div>
+            </section>
+            <div class="container mob-table">
+                <?php 
+          $result = $mysqli->query("SELECT * FROM table_prices WHERE selection = 'Отсутствует' ORDER BY name");
+          echo
+          '<div class="table-responsive"><table class="table table-hover table-striped">
+          <thead>
+                  <tr>
+                    <th scope="col">Название сорта</th>
+                    <th scope="col">Срок созревания</th>
+                    <th scope="col">Сила роста</th>
+                    <th scope="col">Гроздь</th>
+                    <th scope="col">Ягода</th>
+                    <th scope="col">Вкус и консистенция мякоти</th>
+                    <th scope="col">Морозо-стойкость</th>
+                    <th scope="col">Цена (Руб) саженца</th>
+                    <th scope="col">Цена (Руб) черенка</th>
+                  </tr>
+          </thead>
+          <tbody>';
+          while ($row = $result->fetch_assoc()) 
+          {
+            $name = $row['name'];
+            $time = $row['time'];
+            $strength = $row['strength'];
+            $cluster = $row['cluster'];
+            $berry = $row['berry'];
+            $taste = $row['taste'];
+            $f_resistance = $row['f_resistance'];
+            $price_seed = $row['price_seed'];
+            $price_cut = $row['price_cut'];
+            $selection_mini = $row['selection_mini'];
+            echo
+            '<tr>
+              <th scope="row">'.$name.' ('.$selection_mini.')</th>
+              <td>'.$time.'</td>
+              <td>'.$strength.'</td>
+              <td>'.$cluster.'</td>
+              <td>'.$berry.'</td>
+              <td>'.$taste.'</td>
+              <td>'.$f_resistance.'°C</td>
+              <td>'.$price_seed.'</td>
+              <td>'.$price_cut.'</td>
+            </tr>';
+          }
+          echo '</tbody>
+          </table>';
+      ?>
+                <?php 
+        $query = $mysqli->query("SELECT * FROM selections WHERE selection NOT IN ('Отсутствует') ORDER BY selection");
+        while($row = $query->fetch_assoc())
+        { 
+          $selection = $row['selection'];
+          echo
+          '<div class="row">
+                <div class="col"><p style="margin-top: 20px;" class="text-center fw-600">'. $selection .'</p></div>
+          </div>';
+          $result = $mysqli->query("SELECT * FROM table_prices WHERE selection = '$selection' ORDER BY name");
+          echo
+          '<table class="table table-hover table-striped">
+          <thead>
+                  <tr>
+                    <th scope="col">Название сорта</th>
+                    <th scope="col">Срок созревания</th>
+                    <th scope="col">Сила роста</th>
+                    <th scope="col">Гроздь</th>
+                    <th scope="col">Ягода</th>
+                    <th scope="col">Вкус и консистенция мякоти</th>
+                    <th scope="col">Морозо-стойкость</th>
+                    <th scope="col">Цена (Руб) саженца</th>
+                    <th scope="col">Цена (Руб) черенка</th>
+                  </tr>
+          </thead>
+          <tbody>';
+          while ($row = $result->fetch_assoc()) 
+          {
+            $name = $row['name'];
+            $time = $row['time'];
+            $strength = $row['strength'];
+            $cluster = $row['cluster'];
+            $berry = $row['berry'];
+            $taste = $row['taste'];
+            $f_resistance = $row['f_resistance'];
+            $price_seed = $row['price_seed'];
+            $price_cut = $row['price_cut'];
+            echo
+            '<tr>
+              <th scope="row">'.$name.'</th>
+              <td>'.$time.'</td>
+              <td>'.$strength.'</td>
+              <td>'.$cluster.'</td>
+              <td>'.$berry.'</td>
+              <td>'.$taste.'</td>
+              <td>'.$f_resistance.'°C</td>
+              <td>'.$price_seed.'</td>
+              <td>'.$price_cut.'</td>
+            </tr>';
+          }
+          echo '</tbody>
+          </table>';
+        }
+      ?>
+            </div>
+            <p class="text-margin fw-600">* — Без подтверждения сортности.</p>
+        </div>
+
+        </section>
+    </div>
+    <footer th:insert="~{blocks/footer :: footer}"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

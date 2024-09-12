@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ВИНОГРАДиЯ — продажа саженцев, черенков винограда Горбач А.Ф. из Волгоградской области</title>
+    <meta name="description"
+          content="Продажа саженцев и черенков распространенных и новых сортов и гибридных форм винограда">
+    <meta name="keywords"
+          content="саженцы винограда, черенки винограда, Волгоградская область, Волгоград, купить, продажа"/>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-footer.css">
+</head>
+
+<body>
+    <div class="main">
+        <header th:insert="~{blocks/header :: header}"></header>
+        <section>
+            <div class="container text-margin">
+                <p>Все саженцы корнесобственные, черенки: стандарт – 3-4 глазковые, минимальная длина 20-25 см.,
+                    минимальный
+                    и максимальный диаметр в пределах сортовых особенностей.</p>
+                <p>Минимальная сумма заказа 1000 руб. без учёта стоимости доставки. Почтовые расходы 500 руб.</p>
+                <p>Заказ согласовывается, а затем высылается после предоплаты на карту Сбербанка 5469 1100 1258 6988,
+                    получатель Горбач Андрей Феодосиевич.</p>
+                <p>После перечисления денег, пожалуйста, обязательно вышлите сообщение (смс / e-mail / Viber, WhatsApp)
+                    с
+                    вашими ФИО и суммой платежа для подтверждения платежа.</p>
+                <p>Заказ сохраняется в течение 5 дней и расформировывается, если не поступает оплата. Посадочный
+                    материал
+                    реализуется другим покупателям.</p>
+                <p>Обязательно при оформлении заказа указывайте свои полные почтовые реквизиты и номер мобильного
+                    телефона -
+                    для связи с вами в период формирования заказа.</p>
+                <p>Обоснованные претензии по посадочному материалу принимаются в течение 5 дней после получения.</p>
+                <p>Рассылка посадочного материала на осень – <?php echo($year);?> - весна <?php echo($yearNew);?> года будет производиться следующим
+                    образом:
+                    саженцы с 15 октября, черенки с 1 ноября.</p>
+                <p>*Не является публичной офертой. Каталог опубликован в целях информирования, все торговые марки
+                    принадлежат их владельцам.</p>
+            </div>
+        </section>
+    </div>
+    <footer th:insert="~{blocks/footer :: footer}"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

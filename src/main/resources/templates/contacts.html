@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ВИНОГРАДиЯ — продажа саженцев, черенков винограда Горбач А.Ф. из Волгоградской области</title>
+    <meta name="description"
+          content="Продажа саженцев и черенков распространенных и новых сортов и гибридных форм винограда">
+    <meta name="keywords"
+          content="саженцы винограда, черенки винограда, Волгоградская область, Волгоград, купить, продажа"/>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-footer.css">
+</head>
+
+<body>
+    <div class="main">
+        <header th:insert="~{blocks/header :: header}"></header>
+
+        <section>
+            <div class="container text-margin">
+                <p>400120, Россия, г. Волгоград, ул. Кузнецкая 18-28</p>
+                <p><span class="fw-600">E-mail</span>: agorbach34@gmail.com</p>
+                <p><span class="fw-600">Номер телефона</span>: 8-917-726-31-90</p>
+                <p>(Viber, WhatsApp)</p>
+            </div>
+        </section>
+        <section>
+            <div class="container mob-dis">
+                <script type="text/javascript" charset="utf-8" async
+                    src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A395c645a9b57818c2c560fc3e69f7863fd805352068e9d47e491333550dd701f&amp;width=100%25&amp;height=540&amp;lang=ru_RU&amp;scroll=true"></script>
+            </div>
+        </section>
+    </div>
+    <footer th:insert="~{blocks/footer :: footer}"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

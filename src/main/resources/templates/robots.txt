@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /login.php
+Disallow: /login
+Disallow: /admin.php
+Disallow: /admin
+Disallow: /contacts.php
+Disallow: /contacts
+Disallow: /payment.php
+Disallow: /payment
+Disallow: /price.php
+Disallow: /index.php

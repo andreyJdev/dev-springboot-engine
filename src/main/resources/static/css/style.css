@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400;1,500;1,600&display=swap');
+body
+{
+    background-color: rgb(255, 255, 255);
+}
+
+a.move
+{
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover.move
+{
+    text-decoration: underline;
+}
+
+h1
+{
+    font-size: 32px;
+}
+
+section .container
+{
+    background-color: rgba(256, 256, 256, 0.5) !important;
+}
+
+.navbar
+{
+    font-weight: 600;
+    font-family: 'Playfair Display';
+    background-color: #92ffb6;
+    font-size: 25px;
+    line-height: 20px;
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.navbar-dark .navbar-toggler {
+    color: rgb(0, 0, 0, 0.55);
+    border-color: rgb(0, 0, 0, 0.55);
+}
+
+.nav-item a:hover 
+{
+    color: rgb(0, 151, 71) !important;
+}
+
+.active
+{
+    color: rgb(0, 151, 71) !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(0, 0, 0);
+}
+
+section
+{
+    font-size: 18;
+}
+
+.first-margin
+{
+    margin-top: 20px !important;
+}
+
+.text-margin
+{
+    margin-top: 20px;
+}
+
+.mb-10
+{
+    margin-bottom: 10px !important;
+}
+
+.fw-600
+{
+    font-weight: 600;
+}
+
+.card {
+    margin: 10px !important;
+}
+
+.carousel-col
+{
+    padding: 0 0 0 0 !important;
+    padding-bottom: 10px !important;
+}
+
+@media (max-width: 575px) 
+{
+    h1
+    {
+        font-size: 24px;
+    }
+    .mob-dis
+    {
+        display: none;
+    }
+}
+@media (max-width: 991px) 
+{
+    table 
+    {
+        font-size: 10px !important;
+    }
+.mob-table 
+    {
+        min-width: 98% !important;
+    }
+}
+
+footer
+{
+    font-family: 'Playfair Display';
+    padding: 7.5px 0px 7.5px 0px;
+    font-size: 25px;
+    background-color: #92ffb6;
+    line-height: 45px;
+}
+
+footer .move
+{
+    color: black;
+}
+footer .move:hover
+{
+    color: black;
+    color: rgb(0, 151, 71);
+}
+
+footer .row
+{
+    max-width: 100%;
+    margin: auto;
+}
+
+footer .container
+{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+footer .col
+{
+    margin: 3px 3px 3px 3px;
+    padding: 0%;
+}
+
+footer .footLink
+{
+    border: 1px ridge rgba(145, 145, 145, 0.249);
+    border-radius: 3px;
+    padding: 0px 10px 0 10px;
+    white-space: nowrap;
+}
+
+footer .footLink:hover
+{
+    background-color: rgb(67, 67, 67);
+}
+footer a:hover
+{
+    color: #92ffb6 !important;
+    text-decoration-color: #92ffb6 !important;
+    text-decoration: none;
+}
+
+div .card:hover
+{
+    background-color: rgb(234, 234, 234);
+}
