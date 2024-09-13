@@ -12,126 +12,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/style-footer.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style-footer.css}">
 </head>
 
-<body>
-    <div class="main">
-        <header th:insert="~{blocks/header :: header}"/>
-        <section th:insert="~{blocks/buttons :: buttons}"/>
-        <section>
-            <div class="container">
+
+<div class="main">
+    <header th:insert="~{blocks/header :: header}" />
+    <!-- Кнопки выбора действий над сортами -->
+    <section th:insert="~{blocks/buttons :: buttons}" />
+    <section>
+        <div class="container">
             <!-- форма редактирования сорта -->
-            <?php }else if($_SESSION['edit'] == "Добавление сорта"){ ?>
-            <?php echo '<h2> '.$_SESSION['edit'].' </h2>' ?>
-            <form method="POST" action="CRUD">
-                <input type="hidden" name="edit_sess" value="<?php echo $_SESSION['edit']; ?>">
-                <div class="row mb-10">
-                    <select name="selection" class="form-select" id="selection">
-                        <option selected disabled>Селекция</option>
-                        <?php $query = $mysqli->query("SELECT s_id, selection FROM selections");
-                        for($i = 0;$row = $query->fetch_assoc(); $i++)
-                        {
-                            echo '<option value="'.$row['selection'].'">'.$row['selection'].'</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-4" style="padding-left: 0px !important;">
-                        <input type="text" name="name" class="form-control btn-outline-dark" id="name"
-                            placeholder="Название сорта" required />
-                    </div>
-                    <div class="col-8" style="padding-right: 0px !important;">
-                        <input type="text" name="selection_mini" class="form-control btn-outline-dark"
-                            id="selection_mini" placeholder="Мини селекция (если нет полноценной)" />
-                    </div>
-                </div>
-                <div class="row mb-10">
-                        <div class="col" style="padding-left: 0px !important;">
-                            <input type="text" name="sajIn" class="form-control btn-outline-dark" id="sajIn"
-                                value="<?php echo $sajIn; ?>" placeholder="Саженцев (в наличии)" />
-                        </div>
-                        <div class="col" style="padding-right: 0px !important;">
-                            <input type="text" name="sajOut" class="form-control btn-outline-dark"
-                                id="sajOut" value="<?php echo $sajOut; ?>"
-                                placeholder="Саженцев (продано)" />
-                        </div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col" style="padding-left: 0px !important;">
-                            <input type="text" name="cherIn" class="form-control btn-outline-dark" id="cherIn"
-                                value="<?php echo $cherIn; ?>" placeholder="Черенков (в наличии)" />
-                        </div>
-                        <div class="col" style="padding-right: 0px !important;">
-                            <input type="text" name="cherOut" class="form-control btn-outline-dark"
-                                id="cherOut" value="<?php echo $cherOut; ?>"
-                                placeholder="Черенков (продано)" />
-                        </div>
-                    </div>
-                <div class="row mb-10">
-                    <input type="text" name="time" class="form-control btn-outline-dark" id="time"
-                        placeholder="Срок созревания" required />
-                </div>
-                <div class="row mb-10">
-                    <input type="text" name="strength" class="form-control btn-outline-dark" id="strength"
-                        placeholder="Сила роста" required />
-                </div>
-                <div class="row mb-10">
-                    <input type="text" name="cluster" class="form-control btn-outline-dark" id="cluster"
-                        placeholder="Гроздь" required />
-                </div>
-                <div class="row mb-10">
-                    <input type="text" name="berry" class="form-control btn-outline-dark" id="berry" placeholder="Ягода"
-                        required />
-                </div>
-                <div class="row mb-10">
-                    <input type="text" name="taste" class="form-control btn-outline-dark" id="taste"
-                        placeholder="Вкус и консистенция мякоти" required />
-                </div>
-                <div class="row mb-10">
-                    <input type="text" name="f_resistance" class="form-control btn-outline-dark" id="f_resistance"
-                        placeholder="Морозо-стойкость" required />
-                </div>
-                <div class="row mb-10">
-                    <input type="text" name="price_seed" class="form-control btn-outline-dark" id="price_seed"
-                        placeholder="Цена саженца" required />
-                </div>
-                <div class="row mb-10">
-                    <input type="text" name="price_cut" class="form-control btn-outline-dark" id="price_cut"
-                        placeholder="Цена черенка" required />
-                </div>
-                <div class="row mb-10">
-                    <input type="text" name="description" class="form-control btn-outline-dark" id="description"
-                        placeholder="Описание (необязательно)" />
-                </div>
-                <div class="row mb-10">
-                    <input type="text" name="image" class="form-control btn-outline-dark" id="image"
-                        placeholder="Изображение (необязательно)" />
-                </div>
-                <div class="row mb-10">
-                    <input type="submit" name="save" value="Добавить" class="btn btn-dark mb-3" required />
-                </div>
-            </form>
-            <!-- просмотр/редактирование селекций -->
-            <?php }else if($_SESSION['edit'] == "Просмотр/редактирование селекций"){?>
-            <?php echo '<h2> '.$_SESSION['edit'].' </h2>' ?>
-            <table class="table table-borderless table-hover">
-                <tbody>
-                    <?php 
-                create_table("Селекции");
-            ?>
-                </tbody>
-            </table>
-            <?php } ?>
-    </div>
+        </div>
     </section>
     <section>
         <div class="container">
-            <?php 
-            create_head('Просмотр/редактирование таблиц'); 
-        ?>
+            <div class="row">
+                <h1> Просмотр/редактирование таблиц </h1>
+            </div>
         </div>
     </section>
     <!-- просмотр/редактирование продуктов -->
@@ -139,23 +38,69 @@
         <div class="container">
             <table class="table table-borderless table-hover">
                 <tbody>
-                    <?php 
-                create_table("Продукция");
-            ?>
-                </tbody>
-            </table>
 
-            <?php
-    ?>
-            <?php             
-    ?>
+                </tbody></table><table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Название сорта</th>
+                <th scope="col">Саженцы<br>имеется<br>продано</th>
+                <th scope="col">Черенки<br>имеется<br>продано</th>
+                <th scope="col">Срок созревания</th>
+                <th scope="col">Сила роста</th>
+                <th scope="col">Гроздь</th>
+                <th scope="col">Ягода</th>
+                <th scope="col">Вкус и консистенция мякоти</th>
+                <th scope="col">Морозо-стойкость</th>
+                <th scope="col">Цена саженца</th>
+                <th scope="col">Цена черенка</th>
+                <th scope="col">Селекция</th>
+                <th scope="col">Изображение</th>
+                <th scope="col">Описание</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="product : ${products}">
+                <th scope="row" th:text="${product.getName()}"/>
+                <td>
+                    <span th:text="${product.getSajIn()}" /><br><span th:text="${product.getSajOut()}" />
+                </td>
+                <td>
+                    <span th:text="${product.getCherIn()}" /><br><span th:text="${product.getCherOut()}" />
+                </td>
+                <td th:text="${product.getTime()}" />
+                <td th:text="${product.getStrength()}" />
+                <td th:text="${product.getCluster()}" />
+                <td th:text="${product.getBerry()}" />
+                <td th:text="${product.getTaste()}" />
+                <td th:text="${product.getResistanceCold()}" />
+                <td th:text="${product.getPriceSeed()}" />
+                <td th:text="${product.getPriceCut()}" />
+                <td th:if="${product.getSelection() != null}" th:text="${product.getSelection().getName()}" />
+                <td th:if="${product.getSelection() == null}" />
+                <td th:text="${product.getImage()}" />
+                <td th:text="${product.getDescription()}" />
+
+
+                <td>
+                    <a th:href="@{/admin/{id}/upd-product(id=${product.getId()})}" class="btn btn-outline-dark">Изменить</a>
+                </td>
+                <td>
+                    <a href="CRUD?delete1=92" class="btn btn-outline-dark">Удалить</a>
+                </td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+
         </div>
     </section>
-    </div>
-    <footer th:insert="~{blocks/footer :: footer}"></footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-        crossorigin="anonymous"></script>
-    </body>
+</div>
+<footer th:insert="~{blocks/footer :: footer}" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
-</html>
+

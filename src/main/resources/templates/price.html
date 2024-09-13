@@ -17,125 +17,87 @@
 </head>
 
 <body>
-    <div class="main">
-        <header th:insert="~{blocks/header :: header}"></header>
+<div class="main">
+    <header th:insert="~{blocks/header :: header}"></header>
 
-        <section>
-            <section>
-                <div class="container text-margin">
-                    <h1>Каталог саженцев, черенков винограда на осень <?php echo($year);?> - весна <?php echo($yearNew);?> года</h1>
-                    <!--<a class="move" href="download/Price-list_GorbachAF_2022-2023.pdf" download>Скачать прайс-лист</a>-->
+    <section>
+        <div class="container text-margin">
+            <h1>Каталог саженцев, черенков винограда на осень <?php echo($year);?> - весна <?php echo($yearNew);?>
+                года</h1>
+            <!--<a class="move" href="download/Price-list_GorbachAF_2022-2023.pdf" download>Скачать прайс-лист</a>-->
+        </div>
+        <div class="container mob-table">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Название сорта</th>
+                    <th scope="col">Срок созревания</th>
+                    <th scope="col">Сила роста</th>
+                    <th scope="col">Гроздь</th>
+                    <th scope="col">Ягода</th>
+                    <th scope="col">Вкус и консистенция мякоти</th>
+                    <th scope="col">Морозо-стойкость</th>
+                    <th scope="col">Цена (Руб) саженца</th>
+                    <th scope="col">Цена (Руб) черенка</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <th scope="row" th:text="${product.getName()}" />
+                    <td th:text="${product.getTime()}" />
+                    <td th:text="${product.getStrength()}" />
+                    <td th:text="${product.getCluster()}" />
+                    <td th:text="${product.getBerry()}"/>
+                    <td th:text="${product.getTaste()}"/>
+                    <td th:text="${product.getResistanceCold()}"/>
+                    <td th:text="${product.getPriceSeed()}"/>
+                    <td th:text="${product.getPriceCut()}"/>
+                </tr>
+                </tbody>
+            </table>
+            <div class="selection-table" th:each="selection : ${selections}">
+                <div class="row">
+                    <div class="col">
+                        <p style="margin-top: 20px;" class="text-center fw-600"
+                           th:text="${selection.getName()}"/>
+                    </div>
                 </div>
-            </section>
-            <div class="container mob-table">
-                <?php 
-          $result = $mysqli->query("SELECT * FROM table_prices WHERE selection = 'Отсутствует' ORDER BY name");
-          echo
-          '<div class="table-responsive"><table class="table table-hover table-striped">
-          <thead>
-                  <tr>
-                    <th scope="col">Название сорта</th>
-                    <th scope="col">Срок созревания</th>
-                    <th scope="col">Сила роста</th>
-                    <th scope="col">Гроздь</th>
-                    <th scope="col">Ягода</th>
-                    <th scope="col">Вкус и консистенция мякоти</th>
-                    <th scope="col">Морозо-стойкость</th>
-                    <th scope="col">Цена (Руб) саженца</th>
-                    <th scope="col">Цена (Руб) черенка</th>
-                  </tr>
-          </thead>
-          <tbody>';
-          while ($row = $result->fetch_assoc()) 
-          {
-            $name = $row['name'];
-            $time = $row['time'];
-            $strength = $row['strength'];
-            $cluster = $row['cluster'];
-            $berry = $row['berry'];
-            $taste = $row['taste'];
-            $f_resistance = $row['f_resistance'];
-            $price_seed = $row['price_seed'];
-            $price_cut = $row['price_cut'];
-            $selection_mini = $row['selection_mini'];
-            echo
-            '<tr>
-              <th scope="row">'.$name.' ('.$selection_mini.')</th>
-              <td>'.$time.'</td>
-              <td>'.$strength.'</td>
-              <td>'.$cluster.'</td>
-              <td>'.$berry.'</td>
-              <td>'.$taste.'</td>
-              <td>'.$f_resistance.'°C</td>
-              <td>'.$price_seed.'</td>
-              <td>'.$price_cut.'</td>
-            </tr>';
-          }
-          echo '</tbody>
-          </table>';
-      ?>
-                <?php 
-        $query = $mysqli->query("SELECT * FROM selections WHERE selection NOT IN ('Отсутствует') ORDER BY selection");
-        while($row = $query->fetch_assoc())
-        { 
-          $selection = $row['selection'];
-          echo
-          '<div class="row">
-                <div class="col"><p style="margin-top: 20px;" class="text-center fw-600">'. $selection .'</p></div>
-          </div>';
-          $result = $mysqli->query("SELECT * FROM table_prices WHERE selection = '$selection' ORDER BY name");
-          echo
-          '<table class="table table-hover table-striped">
-          <thead>
-                  <tr>
-                    <th scope="col">Название сорта</th>
-                    <th scope="col">Срок созревания</th>
-                    <th scope="col">Сила роста</th>
-                    <th scope="col">Гроздь</th>
-                    <th scope="col">Ягода</th>
-                    <th scope="col">Вкус и консистенция мякоти</th>
-                    <th scope="col">Морозо-стойкость</th>
-                    <th scope="col">Цена (Руб) саженца</th>
-                    <th scope="col">Цена (Руб) черенка</th>
-                  </tr>
-          </thead>
-          <tbody>';
-          while ($row = $result->fetch_assoc()) 
-          {
-            $name = $row['name'];
-            $time = $row['time'];
-            $strength = $row['strength'];
-            $cluster = $row['cluster'];
-            $berry = $row['berry'];
-            $taste = $row['taste'];
-            $f_resistance = $row['f_resistance'];
-            $price_seed = $row['price_seed'];
-            $price_cut = $row['price_cut'];
-            echo
-            '<tr>
-              <th scope="row">'.$name.'</th>
-              <td>'.$time.'</td>
-              <td>'.$strength.'</td>
-              <td>'.$cluster.'</td>
-              <td>'.$berry.'</td>
-              <td>'.$taste.'</td>
-              <td>'.$f_resistance.'°C</td>
-              <td>'.$price_seed.'</td>
-              <td>'.$price_cut.'</td>
-            </tr>';
-          }
-          echo '</tbody>
-          </table>';
-        }
-      ?>
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Название сорта</th>
+                        <th scope="col">Срок созревания</th>
+                        <th scope="col">Сила роста</th>
+                        <th scope="col">Гроздь</th>
+                        <th scope="col">Ягода</th>
+                        <th scope="col">Вкус и консистенция мякоти</th>
+                        <th scope="col">Морозо-стойкость</th>
+                        <th scope="col">Цена (Руб) саженца</th>
+                        <th scope="col">Цена (Руб) черенка</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${selection.getProducts()}">
+                        <th scope="row" th:text="${product.getName()}" />
+                        <td th:text="${product.getTime()}" />
+                        <td th:text="${product.getStrength()}" />
+                        <td th:text="${product.getCluster()}" />
+                        <td th:text="${product.getBerry()}"/>
+                        <td th:text="${product.getTaste()}"/>
+                        <td th:text="${product.getResistanceCold()}"/>
+                        <td th:text="${product.getPriceSeed()}"/>
+                        <td th:text="${product.getPriceCut()}"/>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
             <p class="text-margin fw-600">* — Без подтверждения сортности.</p>
         </div>
-
         </section>
-    </div>
-    <footer th:insert="~{blocks/footer :: footer}"></footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+
+</div>
+<footer th:insert="~{blocks/footer :: footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
 </body>

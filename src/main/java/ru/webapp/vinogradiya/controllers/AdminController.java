@@ -3,10 +3,7 @@ package ru.webapp.vinogradiya.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.webapp.vinogradiya.models.Product;
 import ru.webapp.vinogradiya.models.Selection;
 import ru.webapp.vinogradiya.services.ProductsService;
@@ -25,9 +22,23 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String admin() {
-
+    public String admin(Model model) {
+        model.addAttribute("products", productsService.findAll());
         return "admin/admin";
+    }
+
+    @GetMapping("/{id}/upd-product")
+    public String showAllProducts(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("selections", selectionsService.findAll());
+        model.addAttribute("product", productsService.findById(id));
+        return "admin/updProduct";
+    }
+
+    @PostMapping("/{id}")
+    public String updProduct(@PathVariable("id") Long id,
+                             @ModelAttribute("product") Product product) {
+        productsService.update(id, product);
+        return "redirect:/admin";
     }
 
     @GetMapping("/new-product")

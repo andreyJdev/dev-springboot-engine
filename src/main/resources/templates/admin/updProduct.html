@@ -21,10 +21,10 @@
     <header th:insert="~{blocks/header :: header}" />
     <section th:insert="~{blocks/buttons :: buttons}" />
     <div class="container text-margin">
-        <!-- форма добавления сорта -->
-        <h2> Добавление сорта </h2>
-        <form th:method="POST" th:action="@{/admin/save-prod}" th:object="${product}">
-            <div class="row mb-10">
+        <!-- форма редактирования (ничем от добавления не отличается, только методом PUT) сорта -->
+        <h2> Редактирования сорта </h2>
+        <form th:method="POST" th:action="@{/admin/{id}(id=${product.getId()})}" th:object="${product}">
+        <div class="row mb-10">
                 <select name="selection" class="form-select" id="selection">
                     <option selected disabled> Выберите селекцию </option>
                     <option th:each="selection : ${selections}" th:value="${selection.getId()}" th:text="${selection.getName()}" th:field="*{selection}" />;
@@ -104,7 +104,7 @@
                        th:field="*{image}" placeholder="Изображение (необязательно)" />
             </div>
             <div class="row mb-10">
-                <input type="submit" value="Добавить" class="btn btn-dark mb-3" />
+                <input type="submit" value="Изменить" class="btn btn-dark mb-3" />
             </div>
         </form>
     </div>
