@@ -9,7 +9,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(100)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>
@@ -20,23 +20,39 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="time" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="time" type="VARCHAR(100)"/>
-            <column name="strength" type="VARCHAR(100)"/>
-            <column name="cluster" type="VARCHAR(100)"/>
-            <column name="berry" type="VARCHAR(100)"/>
-            <column name="taste" type="VARCHAR(100)"/>
-            <column name="resistance_cold" type="INT"/>
-            <column name="price_seed" type="INT"/>
-            <column name="price_cut" type="INT"/>
+            <column name="strength" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cluster" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="berry" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="taste" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resistance_cold" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price_seed" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price_cut" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
             <column name="image" type="VARCHAR(100)"/>
             <column name="description" type="VARCHAR"/>
             <column name="selection_mini" type="VARCHAR(100)"/>
-            <column name="saj_in" type="INT"/>
-            <column name="saj_out" type="INT"/>
-            <column name="cher_in" type="INT"/>
-            <column name="cher_out" type="INT"/>
+            <column name="saj_in" type="VARCHAR(100)"/>
+            <column name="saj_out" type="VARCHAR(100)"/>
+            <column name="cher_in" type="VARCHAR(100)"/>
+            <column name="cher_out" type="VARCHAR(100)"/>
             <column name="selection_id" type="BIGINT"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="product" baseColumnNames="selection_id"

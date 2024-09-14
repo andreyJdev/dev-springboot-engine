@@ -1,14 +1,33 @@
-<div th:fragment="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col text-center"><a class="move" href="https://www.youtube.com/channel/UC2inikx5W5FHsx_haHnzd5A" target="_blank"><div class="footLink">YouTube</div></a></div>
-            <div class="col text-center"><a class="move" href="https://vk.com/vinogradiya" target="_blank"><div class="footLink">ВКонтакте</div></a></div>
-            <div class="col text-center"><a class="move" href="https://ok.ru/profile/577116972632" target="_blank"><div class="footLink">Одноклассники</div></a></div>
+<th:block th:fragment="footer">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center"><a class="move"
+                                                href="https://www.youtube.com/channel/UC2inikx5W5FHsx_haHnzd5A"
+                                                target="_blank">
+                    <div class="footLink">YouTube</div>
+                </a></div>
+                <div class="col text-center"><a class="move" href="https://vk.com/vinogradiya" target="_blank">
+                    <div class="footLink">ВКонтакте</div>
+                </a></div>
+                <div class="col text-center"><a class="move" href="https://ok.ru/profile/577116972632" target="_blank">
+                    <div class="footLink">Одноклассники</div>
+                </a></div>
+            </div>
+            <div class="row">
+                <div class="col text-center"><a class="move" href="https://vk.com/video/@vinogradiya" target="_blank">
+                    <div class="footLink">VK Видео</div>
+                </a></div>
+                <div class="col text-center"><a class="move" href="https://rutube.ru/channel/27218654" target="_blank">
+                    <div class="footLink">RuTube</div>
+                </a></div>
+                <div class="col text-center"><a class="move" href="https://dzen.ru/vinogradiya" target="_blank">
+                    <div class="footLink">Дзен</div>
+                </a></div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col text-center"><a class="move" href="https://vk.com/video/@vinogradiya" target="_blank"><div class="footLink">VK Видео</div></a></div>
-            <div class="col text-center"><a class="move" href="https://rutube.ru/channel/27218654" target="_blank"><div class="footLink">RuTube</div></a></div>
-            <div class="col text-center"><a class="move" href="https://dzen.ru/vinogradiya" target="_blank"><div class="footLink">Дзен</div></a></div>
-        </div>
-    </div>
-</div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+</th:block>

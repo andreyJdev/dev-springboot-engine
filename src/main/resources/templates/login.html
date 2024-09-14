@@ -1,104 +1,15 @@
-<?php
-  ini_set("display_errors", 0);
-  session_start();
-
-  require 'db.php';
-
-  $data = $_POST;
-  if(isset($_POST['do_login']))
-  {
-  $errors = array();
-  $query = $mysqli->query("SELECT * FROM users WHERE login = '$data[login]'") or die($mysqli_error($mysqli));
-  $row = $query->fetch_assoc();
-  if(trim($data['login']) == '')
-  {
-    $errors[] = 'Введите логин!';
-  }
-  if(trim($data['password']) == '')
-  {
-    $errors[] = 'Введите пароль!';
-  }
-  if($data['login'] = $row['login'])
-  {
-    if(password_verify($data['password'], $row['password']))
-    {
-      $sessionvars['login'] = $row['login']; 
-      $sessionvars['privileges'] = $row['privileges']; 
-      $_SESSION['login'] = $sessionvars;
-      //echo $_SESSION['login']['login'];
-      //echo $_SESSION['login']['privileges'];
-    }
-    else
-    {
-      $errors[] = 'Пользователь с такими данными не найден!';
-    }
-    
-  }
-  else
-  {
-    $errors[] = 'Пользователь с такими данными не найден!';
-  }
-}
-?>
-
-<?php
-  if($_SESSION['login']){
-  header("Location: index");
-  exit;
-  }
-?>
-
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-  <meta charset="utf-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="css/style-footer.css">
-	<meta name="robots" content="noindex, nofollow" />
+  <meta name="robots" content="noindex, nofollow" />
+  <th:block th:insert="~{blocks/includes :: includes}" />
   <title>ВИНОГРАДиЯ — авторизация</title>
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
   <div class="main">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container">
-        <a class="navbar-brand" href="/static"><img src="images/logo.webp" height="70px" alt=""></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="price">Прайс-лист</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="payment">Оплата</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contacts">Контакты</a>
-            </li>
-            <?php
-                        if($_SESSION['login']['privileges'] < 8){ }
-                        else
-                        {
-                            echo 
-                            '<li class="nav-item">
-                                        <a class="nav-link" href="admin">Администрирование</a>
-                            </li>';
-                        }
-                    ?>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <th:block th:insert="~{blocks/header :: header}" />
     <section>
       <div class="container first-margin">
         <h1>Авторизация</h1>
@@ -145,10 +56,7 @@
       </div>
     </section>
   </div>
-  <?php include 'footer_id328328429328.php'; ?>
-  <?php
-    $mysqli->close();
-  ?>
+  <th:block th:insert="~{blocks/footer :: footer}"/>
 </body>
 
 </html>

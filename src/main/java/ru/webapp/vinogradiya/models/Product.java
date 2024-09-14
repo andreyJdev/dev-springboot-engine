@@ -1,6 +1,11 @@
 package ru.webapp.vinogradiya.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import ru.webapp.vinogradiya.utils.UniqueName;
 
 @Entity
 @Table(name = "product")
@@ -18,40 +23,70 @@ public class Product {
     )
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
+    //@UniqueName(message = "Выберите другое Название сорта, это занято")
+    @NotBlank(message = "Обязательное заполнение Названия сорта")
+    @Size(max = 100, message = "Не больше 100 символов")
     private String name;
 
     @Column(name = "time")
+    @NotNull(message = "Поле не должно быть пустым")
+    @NotEmpty(message = "Заполните Время созревания")
+    @Size(max = 100, message = "Не больше 100 символов")
     private String time;
 
     @Column(name = "strength")
+    @NotNull(message = "Поле не должно быть пустым")
+    @NotEmpty(message = "Заполните Сила роста")
+    @Size(max = 100, message = "Не больше 100 символов")
     private String strength;
 
     @Column(name = "cluster")
+    @NotNull(message = "Поле не должно быть пустым")
+    @NotEmpty(message = "Заполните Гроздь")
+    @Size(max = 100, message = "Не больше 100 символов")
     private String cluster;
 
     @Column(name = "berry")
+    @NotNull(message = "Поле не должно быть пустым")
+    @NotEmpty(message = "Заполните Ягода")
+    @Size(max = 100, message = "Не больше 100 символов")
     private String berry;
 
     @Column(name = "taste")
+    @NotNull(message = "Поле не должно быть пустым")
+    @NotEmpty(message = "Заполните Вкус и консистенция мякоти")
+    @Size(max = 100, message = "Не больше 100 символов")
     private String taste;
 
     @Column(name = "resistance_cold")
-    private Integer resistanceCold;
+    @NotNull(message = "Поле не должно быть пустым")
+    @NotEmpty(message = "Заполните Морозостойкость")
+    @Size(max = 100, message = "Не больше 100 символов")
+    private String resistanceCold;
 
     @Column(name = "price_seed")
-    private Integer priceSeed;
+    @NotNull(message = "Поле не должно быть пустым")
+    @NotEmpty(message = "Заполните Цена саженца")
+    @Size(max = 100, message = "Не больше 100 символов")
+    private String priceSeed;
 
     @Column(name = "price_cut")
-    private Integer priceCut;
+    @NotNull(message = "Поле не должно быть пустым")
+    @NotEmpty(message = "Заполните Цена черенка")
+    @Size(max = 100, message = "Не больше 100 символов")
+    private String priceCut;
 
     @Column(name = "image")
+    @Size(max = 100, message = "Не больше 100 символов")
     private String image;
 
     @Column(name = "description")
+    @Size(max = 2048, message = "Не больше 2048 символов")
     private String description;
 
     @Column(name = "selection_mini")
+    @Size(max = 100, message = "Не больше 100 символов")
     private String selectionMini;
 
     @Column(name = "saj_in")
@@ -76,8 +111,8 @@ public class Product {
 
     public Product(String strength, String name, String time,
                    String cluster, String berry,
-                   String taste, Integer resistanceCold,
-                   Integer priceSeed, Integer priceCut,
+                   String taste, String resistanceCold,
+                   String priceSeed, String priceCut,
                    String image, String description, String selectionMini,
                    Integer sajIn, Integer sajOut,
                    Integer cherIn, Integer cherOut,
@@ -157,27 +192,27 @@ public class Product {
         this.taste = taste;
     }
 
-    public Integer getResistanceCold() {
+    public String getResistanceCold() {
         return resistanceCold;
     }
 
-    public void setResistanceCold(Integer resistanceCold) {
+    public void setResistanceCold(String resistanceCold) {
         this.resistanceCold = resistanceCold;
     }
 
-    public Integer getPriceSeed() {
+    public String getPriceSeed() {
         return priceSeed;
     }
 
-    public void setPriceSeed(Integer priceSeed) {
+    public void setPriceSeed(String priceSeed) {
         this.priceSeed = priceSeed;
     }
 
-    public Integer getPriceCut() {
+    public String getPriceCut() {
         return priceCut;
     }
 
-    public void setPriceCut(Integer priceCut) {
+    public void setPriceCut(String priceCut) {
         this.priceCut = priceCut;
     }
 

@@ -1,8 +1,11 @@
 package ru.webapp.vinogradiya.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import ru.webapp.vinogradiya.utils.UniqueName;
 
 import java.util.List;
 
@@ -20,9 +23,10 @@ public class Selection {
             generator = "selection_sequence")
     private Long id;
 
-    @Column(name = "name")
-    @NotEmpty(message = "Имя селекции не должно быть пустым")
-    @NotNull(message = "Имя селекции не должно быть пустым")
+    @Column(name = "name", unique = true)
+    //@UniqueName(message = "Выберите другое Название селекции, это занято")
+    @NotBlank(message = "Обязательное заполнение Названия селекции")
+    @Size(max = 100, message = "Не больше 100 символов")
     private String name;
 
     @OneToMany(mappedBy = "selection")

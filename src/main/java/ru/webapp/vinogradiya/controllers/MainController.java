@@ -20,8 +20,8 @@ public class MainController {
     }
 
     @GetMapping
-    public String indexPage() {
-
+    public String indexPage(Model model) {
+        model.addAttribute("arrayOfImages", productsService.findAllByHaveImage());
         return "index";
     }
     @GetMapping("/price")
