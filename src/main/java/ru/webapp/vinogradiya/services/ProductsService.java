@@ -71,7 +71,7 @@ public class ProductsService {
         for (String selection : sortedSelections)
             productsDTO.put(selection, new LinkedHashSet<>());
         // последний ключ для null
-        productsDTO.put("-1", new LinkedHashSet<>());
+        productsDTO.put("-", new LinkedHashSet<>());
 
         // наполнение LinkedHashMap продуктами
         for (Product product : sortedProducts) {
@@ -79,7 +79,7 @@ public class ProductsService {
                 productsDTO.get(product.getSelection().getName()).add(new ProductsTableItemDTO(product));
             }
             else {
-                productsDTO.get("-1").add(new ProductsTableItemDTO(product));
+                productsDTO.get("-").add(new ProductsTableItemDTO(product));
             }
         }
         return productsDTO;

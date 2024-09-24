@@ -21,12 +21,38 @@ $(document).ready(function () {
                                         </div>
                                         <div class="col" style="align-items: flex-start !important;">
                                             <div class="card-product-content">
-                                                <p>${data.description}</p>
+                                               ${data.description !== "-" && data.description !== "" ?
+                    '<div class="product-content-section"> <h2> Описание сорта </h2>' + '<p>' + data.description + '</p> </div>'
+                    : ''}
+                                                    <div class="product-content-section">  
+                                                        <h2>Характеристики</h2>
+                                                        <ul class="product-content-list">                 
+                                                           ${data.time.trim() !== "" && data.time.trim() !== "-" ?
+                    '<li class="product-content-item"><strong>Срок созревания: </strong>' + data.time.trim() + '.</li>' : ''}
+                                                           ${data.strength.trim() !== "" && data.strength.trim() !== "-" ?
+                    '<li class="product-content-item"><strong>Сила роста: </strong>' + data.strength.trim() + '.</li>' : ''}
+                                                           ${data.cluster.trim() !== "" && data.cluster.trim() !== "-" ?
+                    '<li class="product-content-item"><strong>Гроздь: </strong>' + data.cluster.trim() + '.</li>' : ''}
+                                                           ${data.berry.trim() !== "" && data.berry.trim() !== "-" ?
+                    '<li class="product-content-item"><strong>Ягода: </strong>' + data.berry.trim() + '.</li>' : ''}
+                                                           ${data.taste.trim() !== "" && data.taste.trim() !== "-" ?
+                    '<li class="product-content-item"><strong>Вкус и консистенция мякоти: </strong>' + data.taste.trim() + '.</li>' : ''}
+                                                           ${data.resistanceCold.trim() !== "" && data.resistanceCold.trim() !== "-" ?
+                    '<li class="product-content-item"><strong>Морозо-стойкость: </strong>' + data.resistanceCold.trim() + '.</li>' : ''}
+                                                    </div>
+<div class="d-flex justify-content-end mt-4">
+    <div class="price-section">
+        ${data.priceSeed.trim() !== "" && data.priceSeed.trim() !== "-" ?
+                    '<p><span class="fw-600 fs-4 price-text">Цена саженца: </span><span class="display-6 fw-bold" id="price-seed">' + data.priceSeed.trim() +'&#8381;</span></p>' : ''}
+        ${data.priceCut.trim() !== "" && data.priceCut.trim() !== "-" ?
+                    '<p><span class="fw-600 fs-4">Цена черенка: </span><span class="display-6 fw-bold" id="price-cut">' + data.priceCut.trim() + '&#8381;</span></p>' : ''}
+    </div>    
+</div>
+</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                     </div>`;
                 $('body').append(cardTemplate);
 
@@ -39,108 +65,5 @@ $(document).ready(function () {
 
         // Вызов функции с конкретным productId
         loadProduct(productId);
-    });
-
-    $('#nav-price').on('click', function (event) {
-        event.preventDefault();
-
-        $('.content-index').toggle(); // Скрыть/показать содержимое div с классом main
-        $('#table-container').empty(); // Очистить ранее выведенную информацию
-
-        if ($('.content-index').is(':hidden')) {
-            $.ajax({
-                url: '/api/products',
-                method: 'GET',
-                success: function(response) {
-                    console.log('Данные получены:', response); // Отладка
-
-                    // Вычисляем текущий год минус 5 месяцев
-                    var currentDate = new Date();
-                    currentDate.setMonth(currentDate.getMonth() - 5);
-                    var year = currentDate.getFullYear();
-
-                    // Создаем контейнеры для заголовка и таблиц
-                    var headerContainer = $('<div></div>').addClass('container text-margin');
-                    var tablesContainer = $('<div></div>').addClass('container mob-table');
-                    var tableResponsive = $('<div></div>').addClass('table-responsive');
-
-                    headerContainer.append('<h1>Каталог саженцев, черенков винограда на осень ' + year + ' - весна ' + (year + 1) + ' года</h1>');
-
-                    function generateTable(data) {
-                        var table = $('<table></table>').addClass('table table-hover table-striped');
-                        var thead = $('<thead></thead>');
-                        var tbody = $('<tbody></tbody>');
-
-                        // Заголовки таблицы на русском языке
-                        var headers = [
-                            "Название сорта",
-                            "Срок созревания",
-                            "Сила роста",
-                            "Гроздь",
-                            "Ягода",
-                            "Вкус и консистенция мякоти",
-                            "Морозо-стойкость",
-                            "Цена (Руб) саженца",
-                            "Цена (Руб) черенка"
-                        ];
-                        var headerRow = $('<tr></tr>');
-                        headers.forEach(function(header) {
-                            headerRow.append($('<th scope="col"></th>').text(header));
-                        });
-                        thead.append(headerRow);
-                        table.append(thead);
-
-                        // Данные таблицы
-                        data.forEach(function(item) {
-                            var row = $('<tr></tr>');
-                            row.append($('<th scope="row"></th>').text(item.name + (item.selectionMini ? " (" + item.selectionMini + ")" : "")));
-                            row.append($('<td></td>').text(item.time));
-                            row.append($('<td></td>').text(item.strength));
-                            row.append($('<td></td>').text(item.cluster));
-                            row.append($('<td></td>').text(item.berry));
-                            row.append($('<td></td>').text(item.taste));
-                            row.append($('<td></td>').text(item.resistanceCold));
-                            row.append($('<td></td>').text(item.priceSeed));
-                            row.append($('<td></td>').text(item.priceCut));
-                            tbody.append(row);
-                        });
-                        table.append(tbody);
-
-                        return table;
-                    }
-
-                    // Обрабатываем каждый набор данных
-                    if (response.hasOwnProperty("-1")) {
-                        tableResponsive.append(generateTable(response["-1"]));
-                    }
-
-                    for (var key in response) {
-                        if (response.hasOwnProperty(key) && key !== "-1") {
-                            var rowDiv = $('<div></div>').addClass('row');
-                            var colDiv = $('<div></div>').addClass('col');
-                            colDiv.append('<p style="margin-top: 20px;" class="text-center fw-600">' + key + '</p>');
-                            rowDiv.append(colDiv);
-                            tableResponsive.append(rowDiv);
-                            tableResponsive.append(generateTable(response[key]));
-                        }
-                    }
-
-                    // Добавляем заголовок и таблицы в table-container
-                    tablesContainer.append(tableResponsive);
-                    tablesContainer.append('<p class="text-margin fw-600">* — Без подтверждения сортности.</p>');
-                    $('#table-container').append(headerContainer);
-                    $('#table-container').append(tablesContainer);
-
-                    // Показываем контейнер с таблицами
-                    $('#table-container').show();
-                },
-                error: function(error) {
-                    console.log('Ошибка при получении данных:', error);
-                }
-            });
-        } else {
-            // Скрываем контейнер с таблицами, если main снова показывается
-            $('#table-container').hide();
-        }
     });
 });

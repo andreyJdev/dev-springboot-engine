@@ -281,3 +281,15 @@ a:hover.card-description  {
     aspect-ratio: 4 / 3;
     object-fit: cover;
 }
+
+.price-section {
+    color: #434343;
+}
+
+.price-section #price-seed {
+    color: #009747;
+}
+
+.price-section #price-cut {
+    color: #914f0d;
+}
