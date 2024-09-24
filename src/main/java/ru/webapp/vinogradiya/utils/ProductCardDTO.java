@@ -33,6 +33,8 @@ public class ProductCardDTO {
 
     private String selection;
 
+    private String selectionMini;
+
     public ProductCardDTO(Product product) {
         this.name = product.getName();
         this.description = product.getDescription();
@@ -47,6 +49,7 @@ public class ProductCardDTO {
         this.priceCut = product.getPriceCut();
         Optional<Selection> selection = Optional.ofNullable(product.getSelection());
         this.selection = selection.map(Selection::getName).orElse("-");
+        this.selectionMini = product.getSelectionMini();
     }
 
     public String getName() {
@@ -143,5 +146,13 @@ public class ProductCardDTO {
 
     public void setSelection(String selection) {
         this.selection = selection;
+    }
+
+    public String getSelectionMini() {
+        return selectionMini;
+    }
+
+    public void setSelectionMini(String selectionMini) {
+        this.selectionMini = selectionMini;
     }
 }
