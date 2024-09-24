@@ -13,93 +13,15 @@
 
 <body>
 <div class="main">
-    <th:block th:insert="~{blocks/header :: header}" />
-    <th:block th:insert="~{blocks/buttons :: buttons}" />
+    <th:block th:insert="~{blocks/header :: header}"/>
+    <th:block th:insert="~{blocks/buttons :: buttons}"/>
     <div class="container text-margin">
         <!-- форма редактирования (ничем от добавления не отличается, только методом PUT) сорта -->
         <h2> Редактирования сорта </h2>
-        <form th:method="POST" th:action="@{/admin/{id}(id=${product.getId()})}" th:object="${product}">
-        <div class="row mb-10">
-                <select name="selection" class="form-select" id="selection">
-                    <option th:value="${null}" th:field="*{selection}">Выберите селекцию</option>
-                    <option th:each="selection : ${selections}" th:value="${selection.getId()}" th:text="${selection.getName()}" th:field="*{selection}" />;
-                </select>
-            </div>
-            <div class="row mb-10">
-                <div class="col-4" style="padding-left: 0px !important;">
-                    <input name="name" class="form-control btn-outline-dark" id="name"
-                           th:field="*{name}" placeholder="Название сорта" required />
-                </div>
-                <div class="col-8" style="padding-right: 0px !important;">
-                    <input name="selection_mini" class="form-control btn-outline-dark"
-                           id="selection_mini" th:field="*{selectionMini}"
-                           placeholder="Мини селекция (если нет полноценной)" />
-                </div>
-            </div>
-            <div class="row mb-10">
-                <div class="col" style="padding-left: 0px !important;">
-                    <input type="text" class="form-control btn-outline-dark" id="saj_in"
-                           th:field="*{sajIn}" placeholder="Саженцев (в наличии)" />
-                </div>
-                <div class="col" style="padding-right: 0px !important;">
-                    <input type="text" class="form-control btn-outline-dark"
-                           id="saj_out" th:field="*{sajOut}"
-                           placeholder="Саженцев (продано)" />
-                </div>
-            </div>
-            <div class="row mb-10">
-                <div class="col" style="padding-left: 0px !important;">
-                    <input type="text" class="form-control btn-outline-dark" id="cher_in"
-                           th:field="*{cherIn}" placeholder="Черенков (в наличии)" />
-                </div>
-                <div class="col" style="padding-right: 0px !important;">
-                    <input type="text" class="form-control btn-outline-dark"
-                           id="cher_out" th:field="*{cherOut}"
-                           placeholder="Черенков (продано)" />
-                </div>
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="time"
-                       th:field="*{time}" placeholder="Срок созревания" required />
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="strength"
-                       th:field="*{strength}" placeholder="Сила роста" required />
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="cluster"
-                       th:field="*{cluster}" placeholder="Гроздь" required />
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="berry"
-                       th:field="*{berry}" placeholder="Ягода" required />
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="taste"
-                       th:field="*{taste}" placeholder="Вкус и консистенция мякоти" required />
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="resistance_cold"
-                       th:field="*{resistanceCold}" placeholder="Морозо-стойкость" required />
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="price_seed"
-                       th:field="*{priceSeed}" placeholder="Цена саженца" required />
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="price_cut"
-                       th:field="*{priceCut}" placeholder="Цена черенка" required />
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="description"
-                       th:field="*{description}" placeholder="Описание (необязательно)" />
-            </div>
-            <div class="row mb-10">
-                <input type="text" class="form-control btn-outline-dark" id="image"
-                       th:field="*{image}" placeholder="Изображение (необязательно)" />
-            </div>
-            <div class="row mb-10">
-                <input type="submit" value="Изменить" class="btn btn-dark mb-3" />
+        <form th:method="POST" th:action="@{/admin/{id}(id=${product.getId()})}" th:object="${product}" class="admin-form">
+            <th:block th:insert="~{blocks/product_form :: product_form}" />
+            <div class="col-12 mb-2">
+                <input type="submit" value="Изменить" class="btn btn-dark mb-3" style="width: 100% !important;"/>
             </div>
         </form>
     </div>

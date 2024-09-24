@@ -1,0 +1,115 @@
+<th:block th:fragment="product_form">
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <select name="selection" class="form-select" id="selection">
+                <option th:value="${null}" th:field="*{selection}">Без селекции</option>
+                <option th:each="selection : ${selections}" th:value="${selection.getId()}"
+                        th:text="${selection.getName()}" th:field="*{selection}"/>
+            </select>
+            <label for="selection">Выберите селекцию</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2 input-group">
+        <div class="form-floating" style="padding: 0;">
+            <input type="text" class="form-control" id="name" placeholder="Название сорта" th:field="*{name}">
+            <label for="name">Название сорта</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="selection_mini"
+                   placeholder="Мини селекция (если нет полноценной)" th:field="*{selectionMini}">
+            <label for="selection_mini">Мини селекция (если нет полноценной)</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2 input-group">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="saj_in" placeholder="Саженцев (в наличии)" th:field="*{sajIn}">
+            <label for="saj_in">Саженцев (в наличии)</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="saj_out" placeholder="Саженцев (продано)" th:field="*{sajOut}">
+            <label for="saj_out">Саженцев (продано)</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2 input-group">
+        <div class="form-floating" style="padding: 0;">
+            <input type="text" class="form-control" id="cher_in" placeholder="Саженцев (в наличии)"
+                   th:field="*{cherIn}">
+            <label for="saj_in">Черенков (в наличии)</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="cher_out" placeholder="Саженцев (продано)"
+                   th:field="*{cherOut}">
+            <label for="saj_out">Черенков (продано)</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="time"
+                   th:field="*{time}" placeholder="Срок созревания" required/>
+            <label for="time">Срок созревания</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <input type="text" class="form-control btn-outline-dark" id="strength"
+                   th:field="*{strength}" placeholder="Сила роста" required/>
+            <label for="strength">Сила роста</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <input type="text" class="form-control btn-outline-dark" id="cluster"
+                   th:field="*{cluster}" placeholder="Гроздь" required/>
+            <label for="cluster">Гроздь</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <input type="text" class="form-control btn-outline-dark" id="berry"
+                   th:field="*{berry}" placeholder="Ягода" required/>
+            <label for="berry">Ягода</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <input type="text" class="form-control btn-outline-dark" id="taste"
+                   th:field="*{taste}" placeholder="Вкус и консистенция мякоти" required/>
+            <label for="taste">Вкус и консистенция мякоти</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <input type="text" class="form-control btn-outline-dark" id="resistance_cold"
+                   th:field="*{resistanceCold}" placeholder="Морозо-стойкость" required/>
+            <label for="resistance_cold">Морозо-стойкость</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <input type="text" class="form-control btn-outline-dark" id="price_seed"
+                   th:field="*{priceSeed}" placeholder="Цена саженца" required/>
+            <label for="price_seed">Цена саженца</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <input type="text" class="form-control btn-outline-dark" id="price_cut"
+                   th:field="*{priceCut}" placeholder="Цена черенка" required/>
+            <label for="price_cut">Цена черенка</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+                <textarea class="form-control" placeholder="Описание (необязательно)"
+                          id="description" th:field="*{description}" style="min-height: 100px;"></textarea>
+            <label for="description">Описание (необязательно)</label>
+        </div>
+    </div>
+    <div class="col-12 mb-2">
+        <div class="form-floating">
+            <input type="text" class="form-control btn-outline-dark" id="image"
+                   th:field="*{image}" placeholder="Изображение (необязательно)"/>
+            <label for="image">Изображение (необязательно)</label>
+        </div>
+    </div>
+</th:block>

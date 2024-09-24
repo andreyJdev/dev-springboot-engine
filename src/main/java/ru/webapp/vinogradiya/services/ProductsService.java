@@ -5,11 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.webapp.vinogradiya.models.Product;
 import ru.webapp.vinogradiya.repositories.ProductsRepository;
+import ru.webapp.vinogradiya.utils.ProductsTableItemDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,27 +29,60 @@ public class ProductsService {
         return foundProduct.orElse(null);
     }
 
-    public List<Product> findAllByNullSelection() {
-        return findAll().stream()
+    public Set<Product> findAllByNullSelection() {
+        return new TreeSet<>(findAll().stream()
                 .filter(product -> product.getSelection() == null)
-                .collect(Collectors.toList());
+                .toList());
     }
-
-    public static List<ArrayList<Product>> splitArrayList(ArrayList<Product> originalList, int chunkSize) {
-        List<ArrayList<Product>> arrayOfArrays = new ArrayList<>();
-        for (int i = 0; i + chunkSize <= originalList.size(); i += chunkSize) {
-            ArrayList<Product> chunk = new ArrayList<>(originalList.subList(i, i + chunkSize));
-            arrayOfArrays.add(chunk);
+    // ищем все товары, у которых есть изображения и получаем массив (массивов по 3 товара)
+    public List<List<Product>> findAllByHaveImage() {
+        List<Product> allProductsWithImages = new ArrayList<>(
+                findAll().stream()
+                        .filter(product -> !product.getImage().isEmpty())
+                        .sorted()
+                        .collect(Collectors.toList())
+        );
+        return splitArrayToChunks(allProductsWithImages, 3);
+    }
+    // делим массив на подмассивы chunk размером chunkSize
+    public List<List<Product>> splitArrayToChunks(List<Product> originalArray, Integer chunkSize) {
+        List<List<Product>> chunkArray = new ArrayList<>();
+        for (int i = 0; i < originalArray.size() - (chunkSize - 1); i += chunkSize) {
+            List<Product> chunk = new ArrayList<>(originalArray.subList(i, i + chunkSize));
+            chunkArray.add(chunk);
         }
-        return arrayOfArrays;
+        return chunkArray;
     }
 
-    public List<ArrayList<Product>> findAllByHaveImage() {
-        ArrayList<Product> allHasImages = new ArrayList<>(findAll().stream()
-                .filter(product -> !product.getImage().isEmpty())
-                .collect(Collectors.toList()));
-        ArrayList<ArrayList<Product>> arrayOfArrays = new ArrayList<>(splitArrayList(allHasImages, 3));
-        return arrayOfArrays;
+    // поиск всех товаров для таблицы
+    public Map<String, Set<ProductsTableItemDTO>> findProductsForTable() {
+        // отсортированный сет продуктов
+        Set<Product> sortedProducts = new TreeSet<>(productsRepository.findJoinAllProductsWithSelections());
+        // отсортированный сет названий селекций
+        Set<String> sortedSelections = new TreeSet<>(
+                sortedProducts.stream()
+                        .filter(product -> product.getSelection() != null)
+                        .map(product -> product.getSelection().getName())
+                        .toList());
+
+        Map<String, Set<ProductsTableItemDTO>> productsDTO = new LinkedHashMap<>();
+
+        // LinkedHashMap заполнение ключами (именами селекций)
+        for (String selection : sortedSelections)
+            productsDTO.put(selection, new LinkedHashSet<>());
+        // последний ключ для null
+        productsDTO.put("-1", new LinkedHashSet<>());
+
+        // наполнение LinkedHashMap продуктами
+        for (Product product : sortedProducts) {
+            if (product.getSelection() != null) {
+                productsDTO.get(product.getSelection().getName()).add(new ProductsTableItemDTO(product));
+            }
+            else {
+                productsDTO.get("-1").add(new ProductsTableItemDTO(product));
+            }
+        }
+        return productsDTO;
     }
 
     @Transactional

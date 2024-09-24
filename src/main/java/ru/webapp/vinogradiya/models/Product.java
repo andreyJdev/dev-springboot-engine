@@ -5,11 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import ru.webapp.vinogradiya.utils.UniqueName;
+
+import java.util.Objects;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product implements Comparable<Product> {
     @Id
     @Column(name = "id")
     @SequenceGenerator(
@@ -278,5 +279,32 @@ public class Product {
 
     public void setSelection(Selection selection) {
         this.selection = selection;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name)
+                && Objects.equals(time, product.time) && Objects.equals(strength, product.strength)
+                && Objects.equals(cluster, product.cluster) && Objects.equals(berry, product.berry)
+                && Objects.equals(taste, product.taste) && Objects.equals(resistanceCold, product.resistanceCold)
+                && Objects.equals(priceSeed, product.priceSeed) && Objects.equals(priceCut, product.priceCut)
+                && Objects.equals(image, product.image) && Objects.equals(description, product.description)
+                && Objects.equals(selectionMini, product.selectionMini) && Objects.equals(sajIn, product.sajIn)
+                && Objects.equals(sajOut, product.sajOut) && Objects.equals(cherIn, product.cherIn)
+                && Objects.equals(cherOut, product.cherOut);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, time, strength, cluster, berry, taste, resistanceCold,
+                priceSeed, priceCut, image, description, selectionMini, sajIn, sajOut, cherIn, cherOut);
+    }
+
+    @Override
+    public int compareTo(Product product) {
+        return this.name.compareTo(product.getName());
     }
 }

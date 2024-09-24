@@ -23,8 +23,8 @@
     </section>
     <section>
         <div class="container">
-            <div class="row">
-                <h1> Просмотр/редактирование таблиц </h1>
+            <div class="container text-margin">
+                <h2> Просмотр/редактирование таблиц </h2>
             </div>
         </div>
     </section>
@@ -75,12 +75,12 @@
                         <td th:if="${product.getSelection() != null}" th:text="${product.getSelection().getName()}"/>
                         <td th:if="${product.getSelection() == null}"/>
                         <td>
-                            <a th:href="@{/admin/{id}/upd-product(id=${product.getId()})}" class="btn btn-outline-dark">Изменить</a>
+                            <a th:href="@{/admin/{id}/upd-product(id=${product.getId()})}" class="btn btn-outline-dark" style="width: 100px !important;">Изменить</a>
                         </td>
                         <td>
                             <form style="display: inline-block;" th:method="POST"
                                   th:action="@{/admin/{id}/del-product(id=${product.getId()})}">
-                                <input type="submit" th:value="Удалить" class="btn btn-outline-dark">
+                                <input type="submit" th:value="Удалить" class="btn btn-outline-dark" style="width: 100px !important;">
                             </form>
                         </td>
                         <td th:text="${product.getSelectionMini()}"/>

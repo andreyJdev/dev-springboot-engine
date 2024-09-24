@@ -49,10 +49,10 @@
             <column name="image" type="VARCHAR(100)"/>
             <column name="description" type="VARCHAR"/>
             <column name="selection_mini" type="VARCHAR(100)"/>
-            <column name="saj_in" type="VARCHAR(100)"/>
-            <column name="saj_out" type="VARCHAR(100)"/>
-            <column name="cher_in" type="VARCHAR(100)"/>
-            <column name="cher_out" type="VARCHAR(100)"/>
+            <column name="saj_in" type="INTEGER"/>
+            <column name="saj_out" type="INTEGER"/>
+            <column name="cher_in" type="INTEGER"/>
+            <column name="cher_out" type="INTEGER"/>
             <column name="selection_id" type="BIGINT"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="product" baseColumnNames="selection_id"

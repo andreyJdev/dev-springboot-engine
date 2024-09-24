@@ -1,15 +1,40 @@
 services:
-  postgre:
-    image: postgres:15-alpine
-    container_name: postgre
+  db_vinogradiya:
+    build: 
+      context: .
+      dockerfile: docker/database/Dockerfile
+    container_name: db_vinogradiya
     volumes:
       - ./pgdataforvinogradiya:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: vinogradiya
       POSTGRES_USER: andreyJdev
       POSTGRES_PASSWORD: htahb;thfnjh
+    restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "5434:5432"
+    networks:
+      - vinogradiya-website
+
+  website:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - db_vinogradiya
+    ports:
+      - "45532:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_vinogradiya:5432/vinogradiya
+      - SPRING_DATASOURCE_USERNAME=andreyJdev
+      - SPRING_DATASOURCE_PASSWORD=htahb;thfnjh
+    networks:
+      - vinogradiya-website
+
+networks:
+  vinogradiya-website:
+    driver: bridge
 
 volumes:
   pgdataforvinogradiya:

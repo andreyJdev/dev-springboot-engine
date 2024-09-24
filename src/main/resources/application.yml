@@ -1,9 +1,0 @@
-spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/vinogradiya
-    username: andreyJdev
-    password: htahb;thfnjh
-
-  liquibase:
-    change-log: db/changelog/main-changelog.xml

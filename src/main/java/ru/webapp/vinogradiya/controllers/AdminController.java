@@ -11,6 +11,9 @@ import ru.webapp.vinogradiya.models.Selection;
 import ru.webapp.vinogradiya.services.ProductsService;
 import ru.webapp.vinogradiya.services.SelectionsService;
 
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -25,7 +28,15 @@ public class AdminController {
 
     @GetMapping()
     public String admin(Model model) {
-        model.addAttribute("products", productsService.findAll());
+        List<Product> products = productsService.findAll();
+        products = products.stream().sorted().toList();
+        int maxSizePreview = 64;
+        for (Product product : products) {
+            if (product.getDescription().length() > maxSizePreview) {
+                product.setDescription(product.getDescription().substring(0, maxSizePreview) + "...");
+            }
+        }
+        model.addAttribute("products", products);
         return "admin/admin";
     }
 
@@ -76,10 +87,13 @@ public class AdminController {
 
     @PostMapping("/save-selection")
     public String saveNewSelection(@ModelAttribute("selection") @Valid Selection selection,
-                                   BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+                                   BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()){
+            model.addAttribute("selection", new Selection());
+            model.addAttribute("selections", selectionsService.findAll());
+            model.addAttribute("status", "Добавить");
             return "admin/newUpdSelection";
-
+        }
         selectionsService.create(selection);
         return "redirect:/admin/new-selection";
     }
@@ -95,9 +109,13 @@ public class AdminController {
     @PostMapping("/{id}/upd")
     public String updSelection(@PathVariable("id") Long id,
                                @ModelAttribute("selection") @Valid Selection selection,
-                               BindingResult bindingResult) {
-        if(bindingResult.hasErrors())
+                               BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("selection", selectionsService.findById(id));
+            model.addAttribute("selections", selectionsService.findAll());
+            model.addAttribute("status", "Изменить");
             return "admin/newUpdSelection";
+        }
         selectionsService.update(id, selection);
 
         return "redirect:/admin/new-selection";
