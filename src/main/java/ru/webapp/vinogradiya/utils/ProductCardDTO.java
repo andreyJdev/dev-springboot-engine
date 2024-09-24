@@ -1,9 +1,5 @@
 package ru.webapp.vinogradiya.utils;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import ru.webapp.vinogradiya.models.Product;
 import ru.webapp.vinogradiya.models.Selection;
 

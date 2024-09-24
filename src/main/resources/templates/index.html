@@ -9,13 +9,12 @@
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script th:src="@{/js/index.js}"></script>
+    <script th:src="@{/js/product_card.js}"></script>
     <title>ВИНОГРАДиЯ — продажа саженцев, черенков винограда Горбач А.Ф. из Волгоградской области</title>
     <meta name="description"
           content="Продажа саженцев и черенков распространенных и новых сортов и гибридных форм винограда">
     <meta name="keywords"
           content="саженцы винограда, черенки винограда, Волгоградская область, Волгоград, купить, продажа"/>
-
 </head>
 
 <body>
@@ -82,7 +81,7 @@
     <section class="content-index">
         <div class="container">
             <div class="card-group" th:each="arrayThreeImages : ${arrayOfImages}">
-                <div class="card" style="margin-left: 0 !important;">
+                <div class="card open-product-card" style="margin-left: 0 !important;">
                     <img th:src="'/images/' + ${arrayThreeImages.get(0).getImage()}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${arrayThreeImages.get(0).getName()}"/>
@@ -90,7 +89,7 @@
                            th:data-product-id="${arrayThreeImages.get(0).getId()}">Подробнее</a>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card open-product-card">
                     <img th:src="'/images/' + ${arrayThreeImages.get(1).getImage()}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${arrayThreeImages.get(1).getName()}"/>
@@ -98,7 +97,7 @@
                            th:data-product-id="${arrayThreeImages.get(1).getId()}">Подробнее</a>
                     </div>
                 </div>
-                <div class="card" style="margin-right: 0 !important;">
+                <div class="card open-product-card" style="margin-right: 0 !important;">
                     <img th:src="'/images/' + ${arrayThreeImages.get(2).getImage()}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${arrayThreeImages.get(2).getName()}"/>

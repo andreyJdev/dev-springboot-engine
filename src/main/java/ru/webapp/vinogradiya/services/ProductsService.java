@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.webapp.vinogradiya.models.Product;
 import ru.webapp.vinogradiya.repositories.ProductsRepository;
+import ru.webapp.vinogradiya.utils.ProductThunbnailDTO;
 import ru.webapp.vinogradiya.utils.ProductsTableItemDTO;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -35,20 +35,21 @@ public class ProductsService {
                 .toList());
     }
     // ищем все товары, у которых есть изображения и получаем массив (массивов по 3 товара)
-    public List<List<Product>> findAllByHaveImage() {
-        List<Product> allProductsWithImages = new ArrayList<>(
+    public List<List<ProductThunbnailDTO>> findAllByHaveImage() {
+        List<ProductThunbnailDTO> allProductsWithImages = new ArrayList<>(
                 findAll().stream()
                         .filter(product -> !product.getImage().isEmpty())
                         .sorted()
-                        .collect(Collectors.toList())
+                        .map(ProductThunbnailDTO::new)
+                        .toList()
         );
         return splitArrayToChunks(allProductsWithImages, 3);
     }
     // делим массив на подмассивы chunk размером chunkSize
-    public List<List<Product>> splitArrayToChunks(List<Product> originalArray, Integer chunkSize) {
-        List<List<Product>> chunkArray = new ArrayList<>();
+    public List<List<ProductThunbnailDTO>> splitArrayToChunks(List<ProductThunbnailDTO> originalArray, Integer chunkSize) {
+        List<List<ProductThunbnailDTO>> chunkArray = new ArrayList<>();
         for (int i = 0; i < originalArray.size() - (chunkSize - 1); i += chunkSize) {
-            List<Product> chunk = new ArrayList<>(originalArray.subList(i, i + chunkSize));
+            List<ProductThunbnailDTO> chunk = new ArrayList<>(originalArray.subList(i, i + chunkSize));
             chunkArray.add(chunk);
         }
         return chunkArray;

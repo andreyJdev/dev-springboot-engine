@@ -105,11 +105,34 @@
             <label for="description">Описание (необязательно)</label>
         </div>
     </div>
-    <div class="col-12 mb-2">
-        <div class="form-floating">
-            <input type="text" class="form-control btn-outline-dark" id="image"
-                   th:field="*{image}" placeholder="Изображение (необязательно)"/>
-            <label for="image">Изображение (необязательно)</label>
+    <div class="row mb-2">
+        <div class="col-8">
+            <div class="form-floating">
+                <input type="text" class="form-control btn-outline-dark" id="image"
+                       th:field="*{image}" placeholder="Изображение (необязательно)"/>
+                <label for="image">Изображение (необязательно)</label>
+            </div>
+        </div>
+        <div class="col-4">
+            <a class="images_search_form btn btn-dark d-flex align-items-center justify-content-center" style="width: 100%; height: 100%; --bs-btn-bg: white; --bs-btn-color: black;" th:href="@{/api/images}">Выбрать из галереи</a>
         </div>
     </div>
+    <div class="overlay-card-product" style="display: none;">
+        <div class="card-product">
+            <div class="card-product-search">
+                <span class="close-btn text-right">×</span>
+                <div class="container">
+                    <div class="card-product-all-images d-flex flex-wrap">
+                        <!-- Дефолтное изображение для загрузки -->
+                        <img src="/images/default.png" id="default-upload" class="card-search-img" alt="Upload Image" style="cursor: pointer;">
+                        <!-- Остальные изображения будут добавлены через JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрытый input для загрузки файла -->
+    <input type="file" id="image-upload" style="display: none;">
+<!--    <div id="message"></div>-->
 </th:block>

@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.webapp.vinogradiya.services.ProductsService;
+import ru.webapp.vinogradiya.utils.ProductThunbnailDTO;
 import ru.webapp.vinogradiya.utils.ProductsTableItemDTO;
 import ru.webapp.vinogradiya.utils.ProductCardDTO;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,7 +25,7 @@ public class RestMainController {
         this.productsService = productsService;
     }
 
-    @GetMapping("{productId}")
+    @GetMapping("{productId:\\d}")
     public ProductCardDTO getProductInfo(@PathVariable("productId") Long productId) {
         ProductCardDTO productCard = new ProductCardDTO(
                 productsService.findById(productId)
@@ -34,6 +36,11 @@ public class RestMainController {
     @GetMapping()
     public Map<String, Set<ProductsTableItemDTO>> getProductTableInfo() {
         return productsService.findProductsForTable();
+    }
+
+    @GetMapping("thunbnails")
+    public List<List<ProductThunbnailDTO>> showThunbnailInfo() {
+        return productsService.findAllByHaveImage();
     }
 
 

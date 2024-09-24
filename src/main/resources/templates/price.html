@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/product_card.js}"></script>
     <title>ВИНОГРАДиЯ — прайс-лист саженцы, черенки винограда Горбач А.Ф.</title>
     <meta name="description"
           content="Прайс-лист черенков и саженцев Горбач А.Ф. с Волгоградской области на осень 2024 – весну 2025 года. Минимальная сумма заказа — 1000р.">
@@ -40,8 +42,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="product : ${products}">
-                        <th scope="row" th:text="${product.getName()} + ' (' + ${product.getSelectionMini()} + ')'"/>
+                    <tr th:each="product : ${products}" class="open-product-card">
+                        <th class="card-description" th:data-product-id="${product.getId()}" scope="row" th:text="${product.getName()} + ' (' + ${product.getSelectionMini()} + ')'"/>
                         <td th:text="${product.getTime()}"/>
                         <td th:text="${product.getStrength()}"/>
                         <td th:text="${product.getCluster()}"/>
@@ -75,8 +77,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="product : ${selection.getProducts()}">
-                            <th scope="row" th:text="${product.getName()}"/>
+                        <tr class="open-product-card" th:each="product : ${selection.getProducts()}">
+                            <th class="card-description" th:data-product-id="${product.getId()}" scope="row" th:text="${product.getName()}"/>
                             <td th:text="${product.getTime()}"/>
                             <td th:text="${product.getStrength()}"/>
                             <td th:text="${product.getCluster()}"/>

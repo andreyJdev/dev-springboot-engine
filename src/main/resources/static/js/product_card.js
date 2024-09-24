@@ -4,9 +4,9 @@ function trimPunctuation(str) {
 
 $(document).ready(function () {
     // Обработчик клика по ссылке "Подробнее"
-    $('.card').on('click', function (event) {
+    $('.open-product-card').on('click', function (event) {
         event.preventDefault(); // Предотвращаем переход по ссылке
-        var productId = $(this).closest('.card').find('.card-description').data('product-id'); // Получаем ID продукта
+        var productId = $(this).closest('.open-product-card').find('.card-description').data('product-id'); // Получаем ID продукта
 
         // Функция для загрузки данных и отображения карточки
         function loadProduct(productId) {
