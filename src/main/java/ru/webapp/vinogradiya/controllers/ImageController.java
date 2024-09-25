@@ -20,11 +20,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/images")
 public class ImageController {
-
-    private final String STATIC_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/";
+    @Value("${SPRING_DATASOURCE_STATIC}")
+    private String STATIC_DIRECTORY;
     @GetMapping()
     public List<String> getImages(Model model) {
-        File folder = new File(STATIC_DIRECTORY + "images");
+        File folder = new File(STATIC_DIRECTORY + "/images");
         File[] listOfFiles = folder.listFiles();
         List<String> imageNames = new ArrayList<>();
 
@@ -41,7 +41,7 @@ public class ImageController {
     public ResponseEntity<String> uploadImage(@RequestParam("image")MultipartFile file)
     {
         try {
-            Path fileNameAndPath = Paths.get(STATIC_DIRECTORY + "images",
+            Path fileNameAndPath = Paths.get(STATIC_DIRECTORY + "/images",
                     file.getOriginalFilename());
             Files.write(fileNameAndPath, file.getBytes());
             return ResponseEntity.ok("Изображение успешно загружено: " + file.getOriginalFilename());
