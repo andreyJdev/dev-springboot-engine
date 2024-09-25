@@ -1,10 +1,12 @@
 package ru.webapp.vinogradiya.controllers;
 
+import jdk.jshell.Snippet;
+import org.apache.coyote.Response;
+import org.hibernate.engine.spi.Status;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ru.webapp.vinogradiya.services.ProductsService;
 import ru.webapp.vinogradiya.utils.ProductThunbnailDTO;
 import ru.webapp.vinogradiya.utils.ProductsTableItemDTO;
@@ -43,5 +45,9 @@ public class RestMainController {
         return productsService.findAllByHaveImage();
     }
 
-
+    @PostMapping("/{id}/del-product")
+    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") Long id) {
+        productsService.delete(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 }

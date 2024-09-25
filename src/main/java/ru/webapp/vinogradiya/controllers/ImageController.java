@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequestMapping("/api/images")
 public class ImageController {
 
-    private final String STATIC_DIRECTORY = "/opt/src/static-resources/";
+    private final String STATIC_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/";
     @GetMapping()
     public List<String> getImages(Model model) {
         File folder = new File(STATIC_DIRECTORY + "images");

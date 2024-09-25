@@ -26,7 +26,7 @@ services:
     ports:
       - "45532:8080"
     volumes:
-      - ./static-resources:/opt/src/static-resources
+      - static-resources:/opt/src/static-resources
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db_vinogradiya:5432/vinogradiya
       - SPRING_DATASOURCE_USERNAME=andreyJdev
@@ -42,3 +42,8 @@ networks:
 volumes:
   pgdataforvinogradiya:
   static-resources:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./src/main/resources/static
+      o: bind

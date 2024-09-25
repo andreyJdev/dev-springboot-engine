@@ -9,6 +9,8 @@
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <title>ВИНОГРАДиЯ — продажа саженцев, черенков винограда Горбач А.Ф. из Волгоградской области</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/delete_table_row.js}"></script>
 </head>
 
 
@@ -78,9 +80,9 @@
                             <a th:href="@{/admin/{id}/upd-product(id=${product.getId()})}" class="btn btn-outline-dark" style="width: 100px !important;">Изменить</a>
                         </td>
                         <td>
-                            <form style="display: inline-block;" th:method="POST"
-                                  th:action="@{/admin/{id}/del-product(id=${product.getId()})}">
-                                <input type="submit" th:value="Удалить" class="btn btn-outline-dark" style="width: 100px !important;">
+                            <form class="delete-form" style="display: inline-block;" th:method="POST"
+                                  th:action="@{/api/products/{id}/del-product(id=${product.getId()})}">
+                                <input type="submit" th:value="Удалить" class="btn btn-outline-dark" th:data-product-id="${product.getId()}" style="width: 100px !important;">
                             </form>
                         </td>
                         <td th:text="${product.getSelectionMini()}"/>

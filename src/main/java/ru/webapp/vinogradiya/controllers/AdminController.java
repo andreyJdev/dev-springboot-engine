@@ -70,12 +70,6 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/{id}/del-product")
-    public String deleteProduct(@PathVariable("id") Long id) {
-        productsService.delete(id);
-        return "redirect:/admin";
-    }
-
     @GetMapping("/new-selection")
     public String newSelection(Model model) {
         model.addAttribute("selection", new Selection());
