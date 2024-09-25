@@ -25,7 +25,7 @@ public class RestMainController {
         this.productsService = productsService;
     }
 
-    @GetMapping("{productId:\\d}")
+    @GetMapping("{productId:\\d+}")
     public ProductCardDTO getProductInfo(@PathVariable("productId") Long productId) {
         ProductCardDTO productCard = new ProductCardDTO(
                 productsService.findById(productId)

@@ -25,10 +25,13 @@ services:
       - db_vinogradiya
     ports:
       - "45532:8080"
+    volumes:
+      - ./static-resources:/opt/src/static-resources
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db_vinogradiya:5432/vinogradiya
       - SPRING_DATASOURCE_USERNAME=andreyJdev
       - SPRING_DATASOURCE_PASSWORD=htahb;thfnjh
+      - SPRING_DATASOURCE_STATIC=/opt/src/static-resources
     networks:
       - vinogradiya-website
 
@@ -38,3 +41,4 @@ networks:
 
 volumes:
   pgdataforvinogradiya:
+  static-resources:

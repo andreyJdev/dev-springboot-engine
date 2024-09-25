@@ -1,5 +1,6 @@
 package ru.webapp.vinogradiya.controllers;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -19,11 +20,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/images")
 public class ImageController {
-    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/images";
 
+    private final String STATIC_DIRECTORY = "/opt/src/static-resources/";
     @GetMapping()
     public List<String> getImages(Model model) {
-        File folder = new File("src/main/resources/static/images");
+        File folder = new File(STATIC_DIRECTORY + "images");
         File[] listOfFiles = folder.listFiles();
         List<String> imageNames = new ArrayList<>();
 
@@ -40,7 +41,7 @@ public class ImageController {
     public ResponseEntity<String> uploadImage(@RequestParam("image")MultipartFile file)
     {
         try {
-            Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY,
+            Path fileNameAndPath = Paths.get(STATIC_DIRECTORY + "images",
                     file.getOriginalFilename());
             Files.write(fileNameAndPath, file.getBytes());
             return ResponseEntity.ok("Изображение успешно загружено: " + file.getOriginalFilename());
